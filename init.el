@@ -47,7 +47,7 @@
 (if window-system
     (tool-bar-mode -1))
 
-(server-start)
+;; (server-start)
 
 ;; WINDOWS & FRAMES
 
@@ -126,10 +126,12 @@
 ;; FONTS
 
 (defconst preferred-monospace-fonts
-  `(("DejaVu Sans Mono" . 80)
-    ("Monospace" . 80)
-    ("Inconsolata" . 90)
-    ("Anonymous Pro" . 100))
+  `(
+    ("DejaVu Sans Mono" . 100)
+    ;; ("Monospace" . 110)
+    ;; ("Inconsolata" . 120)
+    ;; ("Anonymous Pro" . 110)
+    )
   "Preferred monospace fonts")
 
 (defun font-existsp (font)
@@ -176,7 +178,9 @@
 ;; ORG MODE
 (require 'org)
 (setq org-directory (expand-file-name "~/Dropbox/Org")
-      org-agenda-files (list org-directory)
+      org-agenda-files (list (expand-file-name "work.org" org-directory)
+			     (expand-file-name "thesis.org" org-directory)
+			     (expand-file-name "home.org" org-directory))
       org-default-notes-file (expand-file-name "notes.org" org-directory)
       org-completion-use-ido t
       org-yank-adjusted-subtrees t)
@@ -207,6 +211,7 @@
 ;;            "texi2dvi --pdf --clean --verbose --batch %f")))
 
 (global-set-key (kbd "C-c a") 'org-agenda)
+(global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c C") 'org-capture)
 
 
@@ -261,13 +266,6 @@
 (elpy-clean-modeline)
 ;; (elpy-set-backend "jedi")
 
-
-
-
-(require 'ein)
-(setq ein:use-auto-complete t
-      ein:use-smartrep nil)
-
 ;; HASKELL
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
@@ -278,12 +276,41 @@
 (require 'auto-complete)
 (require 'auto-complete-config)
 (ac-config-default)
-(defun ac-cc-mode-setup ()
-  (setq ac-sources '(ac-source-gtags
-		     ac-source-abbrev
-		     ac-source-dictionary
-		     ac-source-words-in-same-mode-buffers
-		     ac-source-semantic)))
+;; (defun ac-cc-mode-init ()
+;;   (require 'ac-c-headers)
+;;   (setq ac-sources (append
+;;		    '(;; ac-source-gtags
+;;		      ;; ac-source-abbrev
+;;		      ;; ac-source-dictionary
+;;		      ;; ac-source-words-in-same-mode-buffers
+;;		      ac-source-c-headers
+;;		      ac-source-c-header-symbols
+;;		      ac-source-semantic)
+;;		    ac-sources))
+;;   (add-to-list 'cc-search-directories
+;;	       '"/usr/lib/gcc/x86_64-linux-gnu/4.8/include"))
+;; (add-hook 'cc-mode-hook 'ac-cc-mode-init)
+(require 'ac-c-headers)
+
+(add-hook 'cc-mode-hook
+	  (lambda ()
+	    (add-to-list 'ac-sources 'ac-source-c-headers)
+	    (add-to-list 'ac-sources 'ac-source-c-header-symbols t)
+	    (add-to-list 'cc-search-directories
+			 '"/usr/lib/gcc/x86_64-linux-gnu/4.8/include")))
+;; (defun ac-cc-mode-init ()
+;;   (require 'ac-c-headers)
+;;   (setq ac-sources '(ac-source-gtags
+;;		     ac-source-abbrev
+;;		     ac-source-dictionary
+;;		     ac-source-words-in-same-mode-buffers
+;;		     ac-source-c-headers
+;;		     ac-source-c-header-symbols t
+;;		     ac-source-semantic))
+;;   (add-to-list 'achead:include-directories
+;;	       '"/usr/lib/gcc/x86_64-linux-gnu/4.8/include"))
+
+
 (defun ac-emacs-lisp-mode-setup ()
   (setq ac-sources '(ac-source-features
 		     ac-source-functions
@@ -293,6 +320,10 @@
 		     ac-source-dictionary
 		     ac-source-words-in-same-mode-buffers)))
 (global-auto-complete-mode)
+
+(require 'ein)
+(setq ein:use-auto-complete t
+      ein:use-smartrep nil)
 
 ;; FILE BINDINGS
 (add-to-list 'auto-mode-alist '("\\.zsh\\'" . sh-mode))
@@ -751,7 +782,7 @@
 ;;
 
 (global-set-key (kbd "C-x |") 'align)  ;; only useful in haskell mode, maybe move there
-(global-set-key [f4] 'goto-line)
+;; (global-set-key [f4] 'goto-line)
 
 (global-set-key (kbd "M-^") 'top-join-line)
 (global-set-key (kbd "C-a") 'smarter-move-beginning-of-line)
@@ -805,3 +836,17 @@
     (back-to-indentation)
     (when (= orig-point (point))
       (move-beginning-of-line 1))))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("11d069fbfb0510e2b32a5787e26b762898c7e480364cbc0779fe841662e4cf5d" default))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
