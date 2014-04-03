@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Prelude for Python files
+# key: pre
+# --
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+# ------------------------------------
+# file: `(file-name-nondirectory (buffer-file-name))`
+# date: `(format-time-string "%a %B %d %H:%M %Y")`
+# author:
+# Maarten Versteegh
+# github.com/mwv
+# maartenversteegh AT gmail DOT com
+#
+# Licensed under GPLv3
+# ------------------------------------
+"""`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`: $1
+
+"""
+
+from __future__ import division
+
+$0

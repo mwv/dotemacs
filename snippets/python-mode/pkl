@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: pkl
+# key: pkl
+# --
+try:
+    import cPickle as pickle
+except ImportError:
+    import pickle
+$0

@@ -1,0 +1,5 @@
+# name: assert
+# key: assert
+# --
+#include <assert.h>
+$0

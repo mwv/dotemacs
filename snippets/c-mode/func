@@ -1,0 +1,37 @@
+# name: function signature and documentation stub
+# key: func
+# contributor: Maarten Versteegh <maartenversteegh@gmail.com>
+# --
+/** $2:
+ * $4
+ *
+${3:$
+  (let*
+    ((indent
+	(concat "\n" (make-string (current-column) 32)))
+	(args
+	 (mapconcat
+	  '(lambda (x)
+	     (if (not (string= (nth 0 x) ""))
+		 (concat "* " "\u005c" "param " (nth 0 x) " ")))
+	  (mapcar
+	   '(lambda (x)
+	      (mapcar
+	       '(lambda (x)
+		  (replace-regexp-in-string "[[:blank:]]*$" ""
+		   (replace-regexp-in-string "^[[:blank:]]*" "" x)))
+	       x))
+	   (mapcar '(lambda (x) (split-string x "="))
+		   (split-string yas-text ",")))
+	  indent)))
+(if (string= args "")
+  "*/"
+  (mapconcat
+   'identity
+   (list "*" "* Arguments:" args "*/")
+   indent)))
+}
+${1:returntype}
+${2:funcname} ($3) {
+  $0
+}

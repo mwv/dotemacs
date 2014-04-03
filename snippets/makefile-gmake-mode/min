@@ -1,0 +1,11 @@
+# name: minimal makefile
+# key: min
+# expand-env: ((yas/indent-line 'fixed) (yas/wrap-around-region 'nil))
+# --
+CFLAGS=-Wall -g
+
+all: ${1:a.out}
+
+clean:
+	rm -f $1
+$0
