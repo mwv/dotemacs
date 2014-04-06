@@ -682,7 +682,7 @@ from `frame-params-file'."
 
 (visual-line-mode 1)
 (require 'fringe)
-(fringe-mode 10)
+(fringe-mode 5)
 (setq overflow-newline-into-fringe nil)
 
 
