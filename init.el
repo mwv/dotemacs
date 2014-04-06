@@ -513,11 +513,18 @@ from `frame-params-file'."
 ;; IDO
 
 (require 'ido)
+
+;; disable ido faces to see flx highlights.
+(setq ido-use-faces nil)
 (setq ido-use-filename-at-point 'guess
       ido-enable-flex-matching t
       ido-create-new-buffer 'always
       ido-default-file-method 'selected-window)
 (ido-mode t)
+(require 'flx-ido)
+;; (ido-mode 1)
+(ido-everywhere nil)
+(flx-ido-mode t)
 
 
 (require 'ido-ubiquitous)
