@@ -130,7 +130,7 @@ from `frame-params-file'."
 	    nil
 	    t))
 
-(add-hook 'emacs-listp-mode-hook 'remove-elc-on-save)
+(add-hook 'emacs-lisp-mode-hook 'remove-elc-on-save)
 
 (defun byte-compile-init-dir ()
   "Byte-recompile all files in .emacs.d."
