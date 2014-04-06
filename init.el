@@ -835,21 +835,28 @@ from `frame-params-file'."
     :inherit 'mode-line-position-face
     :foreground "black" :background "#eab700")
 
-;;
 ;; EXTRA KEYBINDINGS
-;;
 
-(global-set-key (kbd "C-x |") 'align)  ;; only useful in haskell mode, maybe move there
-;; (global-set-key [f4] 'goto-line)
+(defun kill-this-buffer ()
+  (interactive)
+  (kill-buffer (current-buffer)))
 
+(global-set-key (kbd "C-x C-k") 'kill-this-buffer)
+(global-set-key (kbd "C-x |") 'align)
+
+(defun start-shell ()
+  (interactive)
+  (ansi-term "/usr/bin/zsh"))
+
+(global-set-key [f1] 'start-shell)
+(global-set-key [f2] 'rgrep)
+(global-set-key [f5] 'goto-line)
 (global-set-key (kbd "M-^") 'top-join-line)
 (global-set-key (kbd "C-a") 'smarter-move-beginning-of-line)
-
-
 (define-key global-map (kbd "RET") 'newline-and-indent)
 (global-set-key (kbd "C-c C-i") 'yas-expand)
-
-(global-set-key (kbd "C-c C-b") 'ibuffer)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+(global-set-key (kbd "M-o") 'other-window)
 
 
 ;;
