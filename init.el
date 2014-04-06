@@ -311,40 +311,14 @@ from `frame-params-file'."
 (require 'auto-complete)
 (require 'auto-complete-config)
 (ac-config-default)
-;; (defun ac-cc-mode-init ()
-;;   (require 'ac-c-headers)
-;;   (setq ac-sources (append
-;;		    '(;; ac-source-gtags
-;;		      ;; ac-source-abbrev
-;;		      ;; ac-source-dictionary
-;;		      ;; ac-source-words-in-same-mode-buffers
-;;		      ac-source-c-headers
-;;		      ac-source-c-header-symbols
-;;		      ac-source-semantic)
-;;		    ac-sources))
-;;   (add-to-list 'cc-search-directories
-;;	       '"/usr/lib/gcc/x86_64-linux-gnu/4.8/include"))
-;; (add-hook 'cc-mode-hook 'ac-cc-mode-init)
-(require 'ac-c-headers)
-
-(add-hook 'cc-mode-hook
-	  (lambda ()
-	    (add-to-list 'ac-sources 'ac-source-c-headers)
-	    (add-to-list 'ac-sources 'ac-source-c-header-symbols t)
-	    (add-to-list 'cc-search-directories
-			 '"/usr/lib/gcc/x86_64-linux-gnu/4.8/include")))
-;; (defun ac-cc-mode-init ()
-;;   (require 'ac-c-headers)
-;;   (setq ac-sources '(ac-source-gtags
-;;		     ac-source-abbrev
-;;		     ac-source-dictionary
-;;		     ac-source-words-in-same-mode-buffers
-;;		     ac-source-c-headers
-;;		     ac-source-c-header-symbols t
-;;		     ac-source-semantic))
-;;   (add-to-list 'achead:include-directories
-;;	       '"/usr/lib/gcc/x86_64-linux-gnu/4.8/include"))
-
+(defun ac-cc-mode-init ()
+  (require 'ac-c-headers)
+  (setq 'ac-sources (append '(ac-source-c-headers
+			      ac-source-c-header-symbols)
+			    ac-sources))
+  (add-to-list 'cc-search-directories
+	       '"/usr/lib/gcc/x86_64-linux-gnu/4.8/include"))
+(add-hook 'c-mode-hook 'ac-cc-mode-init)
 
 (defun ac-emacs-lisp-mode-setup ()
   (setq ac-sources '(ac-source-features
