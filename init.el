@@ -65,52 +65,54 @@
 
 ;; WINDOWS & FRAMES
 
-;; (defvar frame-params-file
-;;   (locate-user-emacs-file ".frameparams")
-;;   "File to save frame parameters to on exit")
+(defvar frame-params-file
+  (locate-user-emacs-file ".frameparams")
+  "File to save frame parameters to on exit")
 
-;; (defconst frame-params-to-save
-;;   '(left top width height maximized fullscreen)
-;;   "Frame parameters to save and restore")
+(defconst frame-params-to-save
+  '(left top width height maximized fullscreen)
+  "Frame parameters to save and restore")
 
-;; (defun save-frame-parameters ()
-;;   "Save frame parameters of the selected frame.
+(defun save-frame-parameters ()
+  "Save frame parameters of the selected frame.
 
-;; Save selected parameters (see `frame-params-to-save')
-;; to `frame-params-file'."
-;;   (condition-case nil
-;;       (let ((params (--filter (memq (car it) frame-params-to-save)
-;;                            (frame-parameters))))
-;;      (when (and params (display-graphic-p))
-;;        (with-temp-file frame-params-file
-;;          (prin1 params (current-buffer))
-;;          (terpri (current-buffer)))
-;;        t))
-;;     (file-error nil)))
+Save selected parameters (see `frame-params-to-save')
+to `frame-params-file'."
+  (when (display-graphic-p)
+    (condition-case nil
+	(let ((params (--filter (memq (car it) frame-params-to-save)
+				(frame-parameters))))
+	  (when (and params (display-graphic-p))
+	    (with-temp-file frame-params-file
+	      (prin1 params (current-buffer))
+	      (terpri (current-buffer)))
+	    t))
+      (file-error nil))))
 
-;; (defun restore-frame-parameters ()
-;;   "Restore the frame parameters of the selected frame.
+(defun restore-frame-parameters ()
+  "Restore the frame parameters of the selected frame.
 
-;; Restores selected parameters (see `frame-params-to-save')
-;; from `frame-params-file'."
-;;   (condition-case nil
-;;       (-when-let*  ((read-params
-;;                   (with-temp-buffer
-;;                     (insert-file-contents frame-params-file)
-;;                     (goto-char (point-min))
-;;                     (read (current-buffer))))
-;;                   (allowed-params
-;;                    (--filter (memq (car it) frame-params-to-save)
-;;                              read-params)))
-;;                 (setq initial-frame-alist
-;;                       (append (--filter (assq (car it) allowed-params)
-;;                                         initial-frame-alist)
-;;                               allowed-params nil)))
-;;     (error-nil)))
+Restores selected parameters (see `frame-params-to-save')
+from `frame-params-file'."
+  (when (display-graphic-p)
+    (condition-case nil
+	(-when-let*  ((read-params
+		       (with-temp-buffer
+			 (insert-file-contents frame-params-file)
+			 (goto-char (point-min))
+			 (read (current-buffer))))
+		      (allowed-params
+		       (--filter (memq (car it) frame-params-to-save)
+				 read-params)))
+	  (setq initial-frame-alist
+		(append (--filter (assq (car it) allowed-params)
+				  initial-frame-alist)
+			allowed-params nil)))
+      (error-nil))))
 
-;; (unless noninteractive
-;;   (add-hook 'kill-emacs-hook 'save-frame-parameters)
-;;   (add-hook 'after-init-hook 'restore-frame-parameters))
+(unless noninteractive
+  (add-hook 'kill-emacs-hook 'save-frame-parameters)
+  (add-hook 'after-init-hook 'restore-frame-parameters))
 
 (require 'dash)
 
