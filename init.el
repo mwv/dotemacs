@@ -282,6 +282,13 @@ from `frame-params-file'."
 ;;   (delete-window))
 
 (require 'git-gutter-fringe)
+(set-face-foreground 'git-gutter-fr:modified "cyan")
+(set-face-background 'git-gutter-fr:modified "gray20")
+(set-face-foreground 'git-gutter-fr:added    "green")
+(set-face-background 'git-gutter-fr:added    "gray20")
+(set-face-foreground 'git-gutter-fr:deleted  "red")
+(set-face-background 'git-gutter-fr:deleted  "gray20")
+(setq git-gutter-fr:side 'right-fringe)
 (global-git-gutter-mode)
 
 (global-set-key (kbd "C-x g") 'magit-status)
