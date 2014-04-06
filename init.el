@@ -252,6 +252,19 @@ from `frame-params-file'."
 (setq yas-snippet-dirs '("~/.emacs.d/snippets/"))
 
 
+;; PROJECTILE
+(require 'projectile)
+(add-hook 'python-mode-hook 'projectile-on)
+(global-set-key (kbd "C-c p f") 'projectile-find-file)
+(global-set-key (kbd "C-c p d") 'projectile-find-dir)
+(global-set-key (kbd "C-c p t") 'projectile-toggle-between-implementation-and-test)
+(global-set-key (kbd "C-c p T") 'projectile-find-test-file)
+(global-set-key (kbd "C-c p g") 'projectile-grep)
+(global-set-key (kbd "C-c p o") 'projectile-multi-occur)
+(global-set-key (kbd "C-c p p") 'projectile-test-project)
+(global-set-key (kbd "C-c p R") 'projectile-regenerate-tags)
+(global-set-key (kbd "C-c p c") 'projectile-compile-project)
+
 ;; GIT & MAGIT
 
 (require 'magit)
