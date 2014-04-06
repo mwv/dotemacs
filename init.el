@@ -173,7 +173,6 @@ from `frame-params-file'."
 ;; COLORTHEME
 
 ;; (load-theme 'zenburn :no-confirm)
-;; (load-theme 'tsdh-dark)
 
 (load-theme 'moe-dark t)
 
