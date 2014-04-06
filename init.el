@@ -7,32 +7,46 @@
 (package-initialize)
 (when (not package-archive-contents)
   (package-refresh-contents))
-(defvar my-packages '(auto-complete
+(defvar my-packages '(ac-c-headers
+		      ac-geiser
+		      ac-octave
 		      auctex
+		      auto-complete
 		      dash
 		      ein
 		      elpy
 		      fic-mode
 		      find-file-in-project
+		      flx
+		      flx-ido
+		      fringe-helper
 		      fuzzy
+		      geiser
+		      git-commit-mode
 		      git-gutter-fringe
 		      highlight-indentation
-		      idomenu
 		      ido-ubiquitous
 		      ido-vertical-mode
-		      fuzzy
+		      idomenu
 		      iedit
 		      ignoramus
+		      info+
+		      lua-mode
 		      magit
 		      moe-theme
+		      multiple-cursors
 		      nose
-		      org
+		      pkg-info
 		      popup
 		      pymacs
+		      pyvenv
+		      quack
 		      rainbow-mode
-		      sr-speedbar
+		      request
+		      s
 		      smex
 		      virtualenv
+		      websocket
 		      yasnippet
 		      zenburn-theme))
 (dolist (p my-packages)
