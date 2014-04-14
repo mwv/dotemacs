@@ -294,7 +294,7 @@ from `frame-params-file'."
 ;;   (delete-window))
 
 (require 'git-gutter-fringe)
-(set-face-foreground 'git-gutter-fr:modified "cyan")
+(set-face-foreground 'git-gutter-fr:modified "orange")
 (set-face-background 'git-gutter-fr:modified "gray20")
 (set-face-foreground 'git-gutter-fr:added    "green")
 (set-face-background 'git-gutter-fr:added    "gray20")
