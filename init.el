@@ -180,6 +180,14 @@ from `frame-params-file'."
 (set-face-foreground 'show-paren-mismatch "black")
 (set-face-background 'show-paren-mismatch "red")
 
+(require 'fill-column-indicator)
+(setq fci-rule-column 79)
+(setq fci-rule-color "gray40")
+(setq fci-rule-width 1)
+(define-globalized-minor-mode global-fci-mode fci-mode
+  (lambda () (fci-mode 1)))
+(global-fci-mode 1)
+
 (set-face-attribute 'fringe nil
 		    :background "gray20")
 
