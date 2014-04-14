@@ -175,6 +175,10 @@ from `frame-params-file'."
 ;; (load-theme 'zenburn :no-confirm)
 
 (load-theme 'moe-dark t)
+(set-face-foreground 'show-paren-match "black")
+(set-face-background 'show-paren-match "green")
+(set-face-foreground 'show-paren-mismatch "black")
+(set-face-background 'show-paren-mismatch "red")
 
 (set-face-attribute 'fringe nil
 		    :background "gray20")
