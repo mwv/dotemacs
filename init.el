@@ -680,16 +680,18 @@ from `frame-params-file'."
   "List of modes that have linum disabled when global linum mode is on"
   :type '(repeat (sexp :tag "Major mode"))
   :tag " Major modes that have linum disabled: "
-  :group 'linum
-)
+  :group 'linum)
+
 (defcustom linum-disable-starred-buffers 't
   "Disable linum in starred buffers"
   :type 'boolean
   :group 'linum)
 (defun linum-on ()
-  "When linum is running globally, disable line numbering in modes defined in linum-disabled-modes-list"
+  "When linum is running globally, disable line numbering in modes defined in
+  linum-disabled-modes-list"
   (unless (or (minibufferp) (member major-mode linum-disabled-modes-list)
-	      (and linum-disable-starred-buffers (string-match "*" (buffer-name))))
+	      (and linum-disable-starred-buffers
+		   (string-match "*" (buffer-name))))
     (linum-mode 1)))
 (set-face-attribute 'linum nil
 		    :background "gray20" :foreground "gray40")
