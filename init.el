@@ -538,18 +538,18 @@ from `frame-params-file'."
 ;; Show the current function name in the header line
 (which-function-mode)
 ;; set which-func to header line instead of mode-line
-(setq-default header-line-format
-	      '((which-func-mode ("" which-func-format " "))))
-(setq mode-line-misc-info
-      (assq-delete-all 'which-func-mode mode-line-misc-info))
+;; (setq-default header-line-format
+;;            '((which-func-mode ("" which-func-format " "))))
+;; (setq mode-line-misc-info
+;;       (assq-delete-all 'which-func-mode mode-line-misc-info))
 
-(set-face-attribute 'header-line nil
-		    :foreground "gray90" :background "gray20"
-		    :inverse-video nil
-		    :box '(:line-width 1 :color "gray30" :style nil)
-		    :family "DejaVu Sans Mono"
-		    :height 100)
-(set-face-background 'which-func "gray20")
+;; (set-face-attribute 'header-line nil
+;;                  :foreground "gray90" :background "gray20"
+;;                  :inverse-video nil
+;;                  :box '(:line-width 1 :color "gray30" :style nil)
+;;                  :family "DejaVu Sans Mono"
+;;                  :height 100)
+(set-face-background 'which-func "gray30")
 
 ;;
 ;; C-MODE
