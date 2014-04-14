@@ -722,12 +722,12 @@ from `frame-params-file'."
 (setq-default
   mode-line-format
   '(;; position
-    (:propertize "%4l:" face mode-line-position-face)
-    (:eval (propertize "%3c" 'face
-		       (if (>= (current-column) 80)
-			   'mode-line-80col-face
-			 'mode-line-position-face)))
-    " "
+    ;; (:propertize "%4l:" face mode-line-position-face)
+    ;; (:eval (propertize "%3c" 'face
+    ;;                 (if (>= (current-column) 80)
+    ;;                     'mode-line-80col-face
+    ;;                   'mode-line-position-face)))
+    ;; " "
     (:eval
      (cond (buffer-read-only
 	    (propertize " RO " 'face 'mode-line-read-only-face))
@@ -740,15 +740,22 @@ from `frame-params-file'."
 		 face mode-line-folder-face)
     (:propertize "%b"
 		 face mode-line-filename-face)
-    ;; narrow
-    " %n "
-    ;; mode indicators: vc, recursive edit, major mode, minor modes, process, global
-    (vc-mode vc-mode)
-    "  %["
-    (:propertize mode-name
+    " "
+    (:propertize which-func-format
 		 face mode-line-mode-face)
-    "%] "
-    "    "))
+
+    ;; mode indicators: vc, recursive edit, major mode,
+    ;; minor modes, process, global
+    (vc-mode vc-mode)
+    " "
+    ;; " \["
+
+    (:propertize mode-name
+	      face mode-line-mode-face)
+    ;; "\] "
+	;; narrow
+    " %n "
+    "  "))
 
 (defun shorten-directory (dir max-length)
   "Show up to `max-length' characters of a directory name `dir'."
@@ -775,7 +782,7 @@ from `frame-params-file'."
 (make-face 'mode-line-80col-face)
 
 (set-face-attribute 'mode-line nil
-    :foreground "gray90" :background "gray30"
+    :foreground "gray70" :background "gray25"
     :inverse-video nil
     :box '(:line-width 1 :color "gray30" :style nil)
     :family "DejaVu Sans Mono"
