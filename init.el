@@ -843,6 +843,9 @@ from `frame-params-file'."
   (interactive)
   (ansi-term "/usr/bin/zsh"))
 
+(add-hook 'term-mode-hook (lambda()
+	(setq yas-dont-activate t)))
+
 (global-set-key [f1] 'start-shell)
 (global-set-key [f2] 'rgrep)
 (global-set-key [f5] 'goto-line)
