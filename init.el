@@ -791,13 +791,13 @@ from `frame-params-file'."
     :inverse-video nil
     :box '(:line-width 1 :color "gray30" :style nil)
     :family "DejaVu Sans Mono"
-    :height 100)
+    :height 80)
 (set-face-attribute 'mode-line-inactive nil
     :foreground "gray50" :background "gray20"
     :inverse-video nil
     :box '(:line-width 1 :color "gray20" :style nil)
     :family "DejaVu Sans Mono"
-    :height 100)
+    :height 80)
 (set-face-attribute 'mode-line-read-only-face nil
     :inherit 'mode-line-face
     :foreground "#4271ae"
@@ -818,14 +818,14 @@ from `frame-params-file'."
     :inherit 'mode-line-face
     ;; :family "Menlo"
     :family "DejaVu Sans Mono"
-    :height 100)
+    :height 80)
 (set-face-attribute 'mode-line-mode-face nil
     :inherit 'mode-line-face
     :foreground "gray80")
 (set-face-attribute 'mode-line-minor-mode-face nil
     :inherit 'mode-line-mode-face
     :foreground "gray40"
-    :height 100)
+    :height 80)
 (set-face-attribute 'mode-line-process-face nil
     :inherit 'mode-line-face
     :foreground "#718c00")
