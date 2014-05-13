@@ -17,6 +17,7 @@
 		      elpy
 		      fic-mode
 		      find-file-in-project
+		      fill-column-indicator
 		      flx
 		      flx-ido
 		      fringe-helper
@@ -38,6 +39,7 @@
 		      nose
 		      pkg-info
 		      popup
+		      projectile
 		      pymacs
 		      pyvenv
 		      quack
@@ -143,7 +145,7 @@ from `frame-params-file'."
 
 (defconst preferred-monospace-fonts
   `(
-    ("DejaVu Sans Mono" . 100)
+    ("DejaVu Sans Mono" . 80)
     ;; ("Monospace" . 110)
     ;; ("Inconsolata" . 120)
     ;; ("Anonymous Pro" . 110)
