@@ -1,9 +1,6 @@
 ;; PACKAGES
 
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-			 ("marmalade" . "http://marmalade-repo.org/packages/")
-			 ("melpa" . "http://melpa.milkbox.net/packages/")
-			 ("elpy" . "http://jorgenschaefer.github.io/packages/")))
+
 
 (package-initialize)
 (when (not package-archive-contents)
@@ -11,7 +8,7 @@
 (defvar my-packages '(ac-c-headers
 		      ac-geiser
 		      ac-octave
-		      auctex
+		      ;; auctex
 		      auto-complete
 		      ;; cython-mode
 		      dash
@@ -28,6 +25,7 @@
 		      git-commit-mode
 		      git-gutter-fringe
 		      highlight-indentation
+		      haskell-mode
 		      ido-ubiquitous
 		      ido-vertical-mode
 		      idomenu
@@ -228,8 +226,8 @@ from `frame-params-file'."
       ;; (load-theme 'moe-dark t)
       (set-face-foreground 'show-paren-match "black")
       (set-face-background 'show-paren-match "green")
-      (set-face-foreground 'font-lock-comment-face "#aa4b4b")
-      (set-face-foreground 'font-lock-comment-delimiter-face "#aa4b4b")
+      (set-face-foreground 'font-lock-comment-face "#00d7af")
+      (set-face-foreground 'font-lock-comment-delimiter-face "#00d7af")
       (set-face-foreground 'iedit-occurrence "black")
       (set-face-background 'iedit-occurrence "yellow")
       ;; (set-face-foreground 'show-paren-mismatch "black")
@@ -263,13 +261,22 @@ from `frame-params-file'."
 
 ;; ORG MODE
 (require 'org)
-(setq org-directory (expand-file-name "~/Dropbox/Org")
-      org-agenda-files (list (expand-file-name "work.org" org-directory)
+
+(setq org-directory (expand-file-name "~/ownCloud/org")
+      org-agenda-files (list (expand-file-name "todo.org" org-directory)
 			     (expand-file-name "thesis.org" org-directory)
-			     (expand-file-name "home.org" org-directory))
+			     (expand-file-name "baby.org" org-directory)
+			     )
       org-default-notes-file (expand-file-name "notes.org" org-directory)
       org-completion-use-ido t
       org-yank-adjusted-subtrees t)
+;; (setq org-directory (expand-file-name "~/Dropbox/Org")
+;;       org-agenda-files (list (expand-file-name "work.org" org-directory)
+;;                           (expand-file-name "thesis.org" org-directory)
+;;                           (expand-file-name "home.org" org-directory))
+;;       org-default-notes-file (expand-file-name "notes.org" org-directory)
+;;       org-completion-use-ido t
+;;       org-yank-adjusted-subtrees t)
 (make-directory org-directory :with-parents)
 
 (add-hook 'org-shiftup-final-hook 'windmove-up)
@@ -277,28 +284,39 @@ from `frame-params-file'."
 (add-hook 'org-shiftdown-final-hook 'windmove-down)
 (add-hook 'org-shiftright-final-hook 'windmove-right)
 
-(require 'org-mobile)
-(setq org-mobile-directory (expand-file-name "~/Dropbox/Org/Mobile")
-      org-mobile-inbox-for-pull
-      (expand-file-name "from-mobile.org" org-directory))
-(make-directory org-mobile-directory :with-parents)
-
-;; (require 'org-latex)
-;; (unless (boundp 'org-export-latex-classes)
-;;   (setq org-export-latex-classes nil))
-;; (add-to-list 'org-export-latex-classes
-;;           '("article"
-;;             "\\documentclass{article}"
-;;             ("\\section{%s}" . "\\section*{%s}")))
-;; (setq org-latex-pdf-process
-;;       (quote ("texi2dvi --pdf --verbose --batch %f"
-;;            "bibtex %b"
-;;            "texi2dvi --pdf --clean --verbose --batch %f"
-;;            "texi2dvi --pdf --clean --verbose --batch %f")))
-
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c C") 'org-capture)
+
+(require 'ox-publish)
+(setq org-publish-project-alist
+      '(
+	("website-pages"
+	 :base-directory "~/ownCloud/website/org/"
+	 :base-extension "org"
+	 :publishing-directory "~/ownCloud/website/public_html/"
+	 :recursive t
+	 :publishing-function org-html-publish-to-html
+	 :headline-levels 4
+	 :auto-preamble t
+	 :auto-sitemap t
+	 :sitemap-filename "sitemap.org"
+	 :sitemap-title "Sitemap"
+	 :export-creator-info nil
+	 :export-author-info nil
+	 :auto-postamle nil
+	 :table-of-contents t
+	 :section-numbers nil
+	 :html-postamble "    <p class=\"postamble\">Last Updated %d.</p> "
+	 :style-include-default nil)
+	("website-static"
+	 :base-directory "~/ownCloud/website/org/"
+	 :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|ogg\\|swf"
+	 :publishing-directory "~/ownCloud/website/public_html/"
+	 :recursive t
+	 :publishing-function org-publish-attachment)
+	("website"
+	 :components ("website-pages" "website-static"))))
 
 
 ;; RECENT FILES
@@ -394,8 +412,15 @@ from `frame-params-file'."
 ;; PYTHON
 (elpy-enable)
 (setq elpy-rpc-python-command "/usr/bin/python2")
+(elpy-set-test-runner 'elpy-test-pytest-runner)
 ;; (setq python-check-command "python2 -m pyflakes")
 (setq python-check-command "/usr/bin/pyflakes")
+(add-hook 'python-mode-hook
+	  (lambda ()
+	    (define-key python-mode-map (kbd "C-c C-v") nil)))
+(add-hook 'python-mode-hook
+	  (lambda ()
+	    (define-key python-mode-map (kbd "C-c C-v") 'elpy-check)))
 (elpy-use-ipython)
 
 ;; until cython-mode works
@@ -403,17 +428,17 @@ from `frame-params-file'."
 
 
 ;; PROJECTILE
-(require 'projectile)
-(add-hook 'python-mode-hook 'projectile-on)
-(global-set-key (kbd "C-c p f") 'projectile-find-file)
-(global-set-key (kbd "C-c p d") 'projectile-find-dir)
-(global-set-key (kbd "C-c p t") 'projectile-toggle-between-implementation-and-test)
-(global-set-key (kbd "C-c p T") 'projectile-find-test-file)
-(global-set-key (kbd "C-c p g") 'projectile-grep)
-(global-set-key (kbd "C-c p o") 'projectile-multi-occur)
-(global-set-key (kbd "C-c p p") 'projectile-test-project)
-(global-set-key (kbd "C-c p R") 'projectile-regenerate-tags)
-(global-set-key (kbd "C-c p c") 'projectile-compile-project)
+;; (require 'projectile)
+;; (add-hook 'python-mode-hook 'projectile-on)
+;; (global-set-key (kbd "C-c p f") 'projectile-find-file)
+;; (global-set-key (kbd "C-c p d") 'projectile-find-dir)
+;; (global-set-key (kbd "C-c p t") 'projectile-toggle-between-implementation-and-test)
+;; (global-set-key (kbd "C-c p T") 'projectile-find-test-file)
+;; (global-set-key (kbd "C-c p g") 'projectile-grep)
+;; (global-set-key (kbd "C-c p o") 'projectile-multi-occur)
+;; (global-set-key (kbd "C-c p p") 'projectile-test-project)
+;; (global-set-key (kbd "C-c p R") 'projectile-regenerate-tags)
+;; (global-set-key (kbd "C-c p c") 'projectile-compile-project)
 
 
 ;; fic-mode
@@ -538,13 +563,13 @@ from `frame-params-file'."
 		  (indent-region (region-beginning (region-end) nil)))))))
 
 ;; AUCTEX
-(setq TeX-auto-save t)
-(setq TeX-parse-self t)
-(setq-default TeX-master nil)
-(add-hook 'LaTeX-mode-hook 'visual-line-mode)
-(add-hook 'LaTeX-mode-hook 'flyspell-mode)
-(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
-(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+;; (setq TeX-auto-save t)
+;; (setq TeX-parse-self t)
+;; (setq-default TeX-master nil)
+;; (add-hook 'LaTeX-mode-hook 'visual-line-mode)
+;; (add-hook 'LaTeX-mode-hook 'flyspell-mode)
+;; (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+;; (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 
 ;;
 ;; APPEARANCE
@@ -554,7 +579,7 @@ from `frame-params-file'."
 
 (visual-line-mode 1)
 (require 'fringe)
-(fringe-mode 5)
+(fringe-mode 20)
 (setq overflow-newline-into-fringe nil)
 
 

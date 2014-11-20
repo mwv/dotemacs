@@ -95,21 +95,34 @@
 (add-to-list 'auto-mode-alist '("\\.zsh\\'" . sh-mode))
 (add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
 
-(if (string= "x" window-system)
-    (progn
-      (require 'moe-theme)
-      (moe-dark)
-      ;; (load-theme 'moe-dark t)
-      (set-face-foreground 'show-paren-match "black")
-      (set-face-background 'show-paren-match "green")
-      (set-face-foreground 'font-lock-comment-face "#00d7af")
-      (set-face-foreground 'font-lock-comment-delimiter-face "#00d7af")
-      ;; (set-face-foreground 'iedit-occurrence "black")
-      ;; (set-face-background 'iedit-occurrence "yellow")
-      ;; (set-face-foreground 'show-paren-mismatch "black")
-      ;; (set-face-background 'show-paren-mismatch "red"))
-      )
-  (load-theme 'darkburn :no-confirm))
+(require 'iedit)
+
+(require 'moe-theme)
+(moe-dark)
+;; (load-theme 'moe-dark t)
+(set-face-foreground 'show-paren-match "black")
+(set-face-background 'show-paren-match "green")
+(set-face-foreground 'font-lock-comment-face "#00d7af")
+(set-face-foreground 'font-lock-comment-delimiter-face "#00d7af")
+(set-face-foreground 'iedit-occurrence "black")
+(set-face-background 'iedit-occurrence "yellow")
+(set-face-foreground 'show-paren-mismatch "black")
+(set-face-background 'show-paren-mismatch "red")
+;; (if (string= "x" window-system)
+;;     (progn
+;;       (require 'moe-theme)
+;;       (moe-dark)
+;;       ;; (load-theme 'moe-dark t)
+;;       (set-face-foreground 'show-paren-match "black")
+;;       (set-face-background 'show-paren-match "green")
+;;       (set-face-foreground 'font-lock-comment-face "#00d7af")
+;;       (set-face-foreground 'font-lock-comment-delimiter-face "#00d7af")
+;;       (set-face-foreground 'iedit-occurrence "black")
+;;       (set-face-background 'iedit-occurrence "yellow")
+;;       (set-face-foreground 'show-paren-mismatch "black")
+;;       (set-face-background 'show-paren-mismatch "red")
+;;       )
+;;   (load-theme 'darkburn :no-confirm))
 
 ;; WINDOWS & FRAMES
 (if (string= "x" window-system)
@@ -164,6 +177,7 @@ from `frame-params-file'."
 )
 
 ;; HELM
+
 
 (require 'helm)
 (require 'helm-config)
@@ -372,7 +386,7 @@ from `frame-params-file'."
 			     (expand-file-name "baby.org" org-directory)
 			     )
       org-default-notes-file (expand-file-name "notes.org" org-directory)
-      org-completion-use-ido t
+      ;; org-completion-use-ido t
       org-yank-adjusted-subtrees t)
 ;; (setq org-directory (expand-file-name "~/Dropbox/Org")
 ;;       org-agenda-files (list (expand-file-name "work.org" org-directory)
@@ -424,21 +438,21 @@ from `frame-params-file'."
 
 
 ;; RECENT FILES
-(require 'recentf)
-(setq recentf-max-saved-items 200
-      recentf-max-menu-items 15)
-(recentf-mode t)
-(defun ido-find-recentf ()
-  "Find a recent file with IDO."
-  (interactive)
-  (let ((file (ido-completing-read "Find recent file: " recentf-list nil t)))
-    (when file
-      (find-file file))))
+;; (require 'recentf)
+;; (setq recentf-max-saved-items 200
+;;       recentf-max-menu-items 15)
+;; (recentf-mode t)
+;; (defun ido-find-recentf ()
+;;   "Find a recent file with IDO."
+;;   (interactive)
+;;   (let ((file (ido-completing-read "Find recent file: " recentf-list nil t)))
+;;     (when file
+;;       (find-file file))))
 
-(global-set-key (kbd "C-c f r") 'ido-find-recentf)
+;; (global-set-key (kbd "C-c f r") 'ido-find-recentf)
 
 
-;; YASNIPPET
+;; yasnippet
 
 (require 'yasnippet)
 (yas-global-mode 1)
@@ -446,27 +460,27 @@ from `frame-params-file'."
 
 ;; AUTOCOMPLETE
 
-(require 'auto-complete)
-(require 'auto-complete-config)
-(ac-config-default)
-(defun ac-cc-mode-init ()
-  (require 'ac-c-headers)
-  (setq 'ac-sources (append '(ac-source-c-headers
-			      ac-source-c-header-symbols)
-			    ac-sources))
-  (add-to-list 'cc-search-directories
-	       '"/usr/lib/gcc/x86_64-linux-gnu/4.8/include"))
-(add-hook 'c-mode-hook 'ac-cc-mode-init)
+;; (require 'auto-complete)
+;; (require 'auto-complete-config)
+;; (ac-config-default)
+;; (defun ac-cc-mode-init ()
+;;   (require 'ac-c-headers)
+;;   (setq 'ac-sources (append '(ac-source-c-headers
+;;                            ac-source-c-header-symbols)
+;;                          ac-sources))
+;;   (add-to-list 'cc-search-directories
+;;             '"/usr/lib/gcc/x86_64-linux-gnu/4.8/include"))
+;; (add-hook 'c-mode-hook 'ac-cc-mode-init)
 
-(defun ac-emacs-lisp-mode-setup ()
-  (setq ac-sources '(ac-source-features
-		     ac-source-functions
-		     ac-source-variables
-		     ac-source-symbols
-		     ac-source-abbrev
-		     ac-source-dictionary
-		     ac-source-words-in-same-mode-buffers)))
-(global-auto-complete-mode)
+;; (defun ac-emacs-lisp-mode-setup ()
+;;   (setq ac-sources '(ac-source-features
+;;                   ac-source-functions
+;;                   ac-source-variables
+;;                   ac-source-symbols
+;;                   ac-source-abbrev
+;;                   ac-source-dictionary
+;;                   ac-source-words-in-same-mode-buffers)))
+;; (global-auto-complete-mode)
 
 (ignoramus-setup)
 
@@ -518,6 +532,60 @@ from `frame-params-file'."
 
 ;; until cython-mode works
 (add-to-list 'auto-mode-alist '("\\.pyx\\'" . python-mode))
+
+;; HASKELL
+;; (add-hook 'haskell-mode-hook
+;;        'turn-on-haskell-unicode-input-method)
+(setq haskell-font-lock-symbols t)
+(add-hook 'haskell-mode-hook
+	  'turn-on-haskell-indentation)
+(add-hook 'haskell-mode-hook
+	  'interactive-haskell-mode)
+(setq haskell-process-type 'cabal-repl)
+(eval-after-load "haskell-mode"
+  '(progn
+     (define-key haskell-mode-map (kbd "C-,") 'haskell-move-nested-left)
+     (define-key haskell-mode-map (kbd "C-.") 'haskell-move-nested-right)
+     (define-key haskell-mode-map (kbd "C-c C-l") 'haskell-process-load-or-reload)
+     (define-key haskell-mode-map (kbd "C-c C-t") 'haskell-process-do-type)
+     (define-key haskell-mode-map (kbd "C-c C-i") 'haskell-process-do-info)
+     (define-key haskell-mode-map (kbd "C-c C-b") 'haskell-process-cabal-build)
+     (define-key haskell-mode-map (kbd "C-c C-c") 'haskell-check)
+     (define-key haskell-mode-map (kbd "C-c C-k") 'haskell-interactive-mode-clear)
+     (define-key haskell-mode-map (kbd "C-c c") 'haskell-process-cabal)
+     (define-key haskell-mode-map (kbd "SPC") 'haskell-mode-contextual-space)
+       ))
+
+(custom-set-variables
+ '(haskell-process-log t)
+ '(haskell-process-suggest-remove-import-lines t)
+ '(haskell-interactive-popup-errors nil)
+ '(haskell-process-type (quote cabal-repl))
+ '(haskell-process-auto-import-loaded-modules t))
+
+(require 'align)
+(global-set-key (kbd "C-x a r") 'align-regexp)
+
+(add-to-list 'align-rules-list
+	     '(haskell-types
+	       (regexp . "\\(\\s-+\\)\\(::\\|∷\\)\\s-+")
+	       (modes quote (haskell-mode literate-haskell-mode))))
+(add-to-list 'align-rules-list
+	     '(haskell-assignment
+	       (regexp . "\\(\\s-+\\)=\\s-+")
+	       (modes quote (haskell-mode literate-haskell-mode))))
+(add-to-list 'align-rules-list
+	     '(haskell-arrows
+	       (regexp . "\\(\\s-+\\)\\(->\\|→\\)\\s-+")
+	       (modes quote (haskell-mode literate-haskell-mode))))
+(add-to-list 'align-rules-list
+	     '(haskell-left-arrows
+	       (regexp . "\\(\\s-+\\)\\(<-\\|←\\)\\s-+")
+	       (modes quote (haskell-mode literate-haskell-mode))))
+
+
+
+
 
 ;; line wrap
 (setq line-move-visual t)
