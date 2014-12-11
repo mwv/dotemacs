@@ -106,3 +106,24 @@
 
 ;; Package zygospore
 (global-set-key (kbd "C-x 1") 'zygospore-toggle-delete-other-windows)
+
+;; fix for company and yasnippet
+
+(define-key company-active-map "\t" 'company-yasnippet-or-completion)
+(defun company-yasnippet-or-completion ()
+  (interactive)
+  (if (yas/expansion-at-point)
+      (progn (company-abort)
+             (yas/expand))
+    (company-complete-common)))
+(defun yas/expansion-at-point ()
+  "tested with v0.6.1. Extracted from `yas/expand'"
+  (first (yas/current-key)))
+
+
+;; bind helm-imenu
+(global-set-key (kbd "C-c C-j") 'helm-imenu)
+(global-set-key (kbd "C-.") 'helm-imenu)
+
+(add-to-list 'load-path "~/.emacs.d/elpa/emacs-ipython-notebook")
+(require 'ein2)

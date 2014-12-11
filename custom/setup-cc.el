@@ -16,14 +16,14 @@
 ;; “java”: The default style for java-mode (see below)
 ;; “user”: When you want to define your own style
 (setq
- c-default-style "linux" ;; set style to "linux"
+ c-default-style "ellemtel" ;; set style to "linux"
  )
 
 ;; Compilation
 (global-set-key (kbd "<f5>") (lambda ()
-			       (interactive)
-			       (setq-local compilation-read-command nil)
-			       (call-interactively 'compile)))
+                               (interactive)
+                               (setq-local compilation-read-command nil)
+                               (call-interactively 'compile)))
 
 ;; setup GDB
 (setq
