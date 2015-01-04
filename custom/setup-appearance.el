@@ -17,12 +17,26 @@
 
 (require 'moe-theme)
 (moe-dark)
-(set-face-foreground 'show-paren-match "black")
-(set-face-background 'show-paren-match "green")
-(set-face-foreground 'font-lock-comment-face "#00d7af")
-(set-face-foreground 'font-lock-comment-delimiter-face "#00d7af")
-(set-face-foreground 'show-paren-mismatch "black")
-(set-face-background 'show-paren-mismatch "red")
+(set-face-attribute 'font-lock-comment-face nil
+                     :foreground "#00d7af")
+(set-face-attribute 'font-lock-comment-delimiter-face nil
+                    :foreground "#00d7af")
+(set-face-attribute 'rainbow-delimiters-unmatched-face nil
+                    :foreground "black"
+                    :background "red")
+(set-face-attribute 'rainbow-delimiters-mismatched-face nil
+                    :foreground "black"
+                    :background "red")
+(set-face-attribute 'rainbow-delimiters-depth-1-face nil
+                    :foreground "#c0c0c0"
+                    :background "black")
+(set-face-attribute 'rainbow-delimiters-depth-2-face nil
+                    :foreground "#5faf00")
+
+(set-face-attribute 'show-paren-mismatch nil
+                     :foreground "black"
+                     :background "red")
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
 (require 'iedit)
 (set-face-foreground 'iedit-occurrence "black")
