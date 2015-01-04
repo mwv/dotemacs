@@ -44,14 +44,14 @@ Save selected parameters (see `frame-params-to-save')
 to `frame-params-file'."
     (when (display-graphic-p)
       (condition-case nil
-      (let ((params (--filter (memq (car it) frame-params-to-save)
-                  (frame-parameters))))
-        (when (and params (display-graphic-p))
-          (with-temp-file frame-params-file
-        (prin1 params (current-buffer))
-        (terpri (current-buffer)))
-          t))
-    (file-error nil))))
+          (let ((params (--filter (memq (car it) frame-params-to-save)
+                                  (frame-parameters))))
+            (when (and params (display-graphic-p))
+              (with-temp-file frame-params-file
+                (prin1 params (current-buffer))
+                (terpri (current-buffer)))
+              t))
+        (file-error nil))))
 
   (defun restore-frame-parameters ()
     "Restore the frame parameters of the selected frame.
@@ -60,24 +60,24 @@ Restores selected parameters (see `frame-params-to-save')
 from `frame-params-file'."
     (when (display-graphic-p)
       (condition-case nil
-      (-when-let*  ((read-params
-             (with-temp-buffer
-               (insert-file-contents frame-params-file)
-               (goto-char (point-min))
-               (read (current-buffer))))
-            (allowed-params
-             (--filter (memq (car it) frame-params-to-save)
-                   read-params)))
-        (setq initial-frame-alist
-          (append (--filter (assq (car it) allowed-params)
-                    initial-frame-alist)
-              allowed-params nil)))
-    (error-nil))))
+          (-when-let*  ((read-params
+                         (with-temp-buffer
+                           (insert-file-contents frame-params-file)
+                           (goto-char (point-min))
+                           (read (current-buffer))))
+                        (allowed-params
+                         (--filter (memq (car it) frame-params-to-save)
+                                   read-params)))
+            (setq initial-frame-alist
+                  (append (--filter (assq (car it) allowed-params)
+                                    initial-frame-alist)
+                          allowed-params nil)))
+        (error-nil))))
 
   (unless noninteractive
     (add-hook 'kill-emacs-hook 'save-frame-parameters)
     (add-hook 'after-init-hook 'restore-frame-parameters))
-)
+  )
 
 
 ;; fic-mode: TODO/FIXME/BUG/KLUDGE in special face in comments only
@@ -105,11 +105,11 @@ from `frame-params-file'."
   "When linum is running globally, disable line numbering in modes defined in
   linum-disabled-modes-list"
   (unless (or (minibufferp) (member major-mode linum-disabled-modes-list)
-          (and linum-disable-starred-buffers
-           (string-match "*" (buffer-name))))
+              (and linum-disable-starred-buffers
+                   (string-match "*" (buffer-name))))
     (linum-mode 1)))
 (set-face-attribute 'linum nil
-            :background "gray20" :foreground "gray40")
+                    :background "gray20" :foreground "gray40")
 (global-linum-mode t)
 
 (require 'uniquify)
@@ -126,7 +126,7 @@ from `frame-params-file'."
 (global-fci-mode 1)
 
 (set-face-attribute 'fringe nil
-            :background "gray20")
+                    :background "gray20")
 
 (require 'company)
 (defvar-local company-fci-mode-on-p nil)
@@ -166,40 +166,40 @@ from `frame-params-file'."
 ;; MODELINE
 
 (setq-default
-  mode-line-format
-  '((:eval
-     (cond (buffer-read-only
-        (propertize " RO " 'face 'mode-line-read-only-face))
-       ((buffer-modified-p)
-        (propertize " ** " 'face 'mode-line-modified-face))
-       (t " -- ")))
-    " "
-    ;; directory and buffer name
-    (:propertize (:eval (shorten-directory default-directory 15))
-         face mode-line-folder-face)
-    (:propertize "%b"
-         face mode-line-filename-face)
-    " "
-    (:propertize which-func-format
-         face mode-line-mode-face)
+ mode-line-format
+ '((:eval
+    (cond (buffer-read-only
+           (propertize " RO " 'face 'mode-line-read-only-face))
+          ((buffer-modified-p)
+           (propertize " ** " 'face 'mode-line-modified-face))
+          (t " -- ")))
+   " "
+   ;; directory and buffer name
+   (:propertize (:eval (shorten-directory default-directory 15))
+                face mode-line-folder-face)
+   (:propertize "%b"
+                face mode-line-filename-face)
+   " "
+   (:propertize which-func-format
+                face mode-line-mode-face)
 
-    ;; mode indicators: vc, recursive edit, major mode,
-    ;; minor modes, process, global
-    (vc-mode vc-mode)
-    " "
-    ;; " \["
+   ;; mode indicators: vc, recursive edit, major mode,
+   ;; minor modes, process, global
+   (vc-mode vc-mode)
+   " "
+   ;; " \["
 
-    (:propertize mode-name
-          face mode-line-mode-face)
-    ;; "\] "
-    ;; narrow
-    " %n "
-    "  "))
+   (:propertize mode-name
+                face mode-line-mode-face)
+   ;; "\] "
+   ;; narrow
+   " %n "
+   "  "))
 
 (defun shorten-directory (dir max-length)
   "Show up to `max-length' characters of a directory name `dir'."
   (let ((path (reverse (split-string (abbreviate-file-name dir) "/")))
-    (output ""))
+        (output ""))
     (when (and path (equal "" (car path)))
       (setq path (cdr path)))
     (while (and path (< (length output) (- max-length 4)))
@@ -221,50 +221,50 @@ from `frame-params-file'."
 (make-face 'mode-line-80col-face)
 
 (set-face-attribute 'mode-line nil
-    :foreground "gray70" :background "grey25"
-    :inverse-video nil
-    :box '(:line-width 1 :color "gray30" :style nil)
-    :family "Monaco"
-    :height 110)
+                    :foreground "gray70" :background "grey25"
+                    :inverse-video nil
+                    :box '(:line-width 1 :color "gray30" :style nil)
+                    :family "Monaco"
+                    :height 110)
 (set-face-attribute 'mode-line-inactive nil
-    :foreground "gray50" :background "gray20"
-    :inverse-video nil
-    :box '(:line-width 1 :color "gray20" :style nil)
-    :family "Monaco"
-    :height 110)
+                    :foreground "gray50" :background "gray20"
+                    :inverse-video nil
+                    :box '(:line-width 1 :color "gray20" :style nil)
+                    :family "Monaco"
+                    :height 110)
 (set-face-attribute 'mode-line-read-only-face nil
-    :inherit 'mode-line-face
-    :foreground "#4271ae"
-    :box '(:line-width 1 :color "#4271ae"))
+                    :inherit 'mode-line-face
+                    :foreground "#4271ae"
+                    :box '(:line-width 1 :color "#4271ae"))
 (set-face-attribute 'mode-line-modified-face nil
-    :inherit 'mode-line-face
-    :foreground "#c82829"
-    :background "#ffffff"
-    :box '(:line-width 1 :color "#c82829"))
+                    :inherit 'mode-line-face
+                    :foreground "#c82829"
+                    :background "#ffffff"
+                    :box '(:line-width 1 :color "#c82829"))
 (set-face-attribute 'mode-line-folder-face nil
-    :inherit 'mode-line-face
-    :foreground "gray60")
+                    :inherit 'mode-line-face
+                    :foreground "gray60")
 (set-face-attribute 'mode-line-filename-face nil
-    :inherit 'mode-line-face
-    :foreground "#eab700"
-    :weight 'bold)
+                    :inherit 'mode-line-face
+                    :foreground "#eab700"
+                    :weight 'bold)
 (set-face-attribute 'mode-line-position-face nil
-    :inherit 'mode-line-face
-    ;; :family "Menlo"
-    :family "Monaco"
-    :height 110)
+                    :inherit 'mode-line-face
+                    ;; :family "Menlo"
+                    :family "Monaco"
+                    :height 110)
 (set-face-attribute 'mode-line-mode-face nil
-    :inherit 'mode-line-face
-    :foreground "gray80")
+                    :inherit 'mode-line-face
+                    :foreground "gray80")
 (set-face-attribute 'mode-line-minor-mode-face nil
-    :inherit 'mode-line-mode-face
-    :foreground "gray40"
-    :height 110)
+                    :inherit 'mode-line-mode-face
+                    :foreground "gray40"
+                    :height 110)
 (set-face-attribute 'mode-line-process-face nil
-    :inherit 'mode-line-face
-    :foreground "#718c00")
+                    :inherit 'mode-line-face
+                    :foreground "#718c00")
 (set-face-attribute 'mode-line-80col-face nil
-    :inherit 'mode-line-position-face
-    :foreground "black" :background "#eab700")
+                    :inherit 'mode-line-position-face
+                    :foreground "black" :background "#eab700")
 
 (provide 'setup-appearance)

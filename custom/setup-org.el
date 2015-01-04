@@ -3,9 +3,9 @@
 
 (setq org-directory (expand-file-name "~/ownCloud/org")
       org-agenda-files (list (expand-file-name "todo.org" org-directory)
-			     (expand-file-name "thesis.org" org-directory)
-			     (expand-file-name "baby.org" org-directory)
-			     )
+                             (expand-file-name "thesis.org" org-directory)
+                             (expand-file-name "baby.org" org-directory)
+                             )
       org-default-notes-file (expand-file-name "notes.org" org-directory)
       ;; org-completion-use-ido t
       org-yank-adjusted-subtrees t)
@@ -30,31 +30,31 @@
 (require 'ox-publish)
 (setq org-publish-project-alist
       '(
-	("website-pages"
-	 :base-directory "~/ownCloud/website/org/"
-	 :base-extension "org"
-	 :publishing-directory "~/ownCloud/website/public_html/"
-	 :recursive t
-	 :publishing-function org-html-publish-to-html
-	 :headline-levels 4
-	 :auto-preamble t
-	 :auto-sitemap t
-	 :sitemap-filename "sitemap.org"
-	 :sitemap-title "Sitemap"
-	 :export-creator-info nil
-	 :export-author-info nil
-	 :auto-postamle nil
-	 :table-of-contents t
-	 :section-numbers nil
-	 :html-postamble "    <p class=\"postamble\">Last Updated %d.</p> "
-	 :style-include-default nil)
-	("website-static"
-	 :base-directory "~/ownCloud/website/org/"
-	 :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|ogg\\|swf"
-	 :publishing-directory "~/ownCloud/website/public_html/"
-	 :recursive t
-	 :publishing-function org-publish-attachment)
-	("website"
-	 :components ("website-pages" "website-static"))))
+        ("website-pages"
+         :base-directory "~/ownCloud/website/org/"
+         :base-extension "org"
+         :publishing-directory "~/ownCloud/website/public_html/"
+         :recursive t
+         :publishing-function org-html-publish-to-html
+         :headline-levels 4
+         :auto-preamble t
+         :auto-sitemap t
+         :sitemap-filename "sitemap.org"
+         :sitemap-title "Sitemap"
+         :export-creator-info nil
+         :export-author-info nil
+         :auto-postamle nil
+         :table-of-contents t
+         :section-numbers nil
+         :html-postamble "    <p class=\"postamble\">Last Updated %d.</p> "
+         :style-include-default nil)
+        ("website-static"
+         :base-directory "~/ownCloud/website/org/"
+         :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|ogg\\|swf"
+         :publishing-directory "~/ownCloud/website/public_html/"
+         :recursive t
+         :publishing-function org-publish-attachment)
+        ("website"
+         :components ("website-pages" "website-static"))))
 
 (provide 'setup-org)

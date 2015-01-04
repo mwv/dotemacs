@@ -10,8 +10,8 @@
     (let ((test-list (split-string test "\\.")))
       (elpy-test-run top
                      "py.test" "-vv" (mapconcat #'identity
-                                               (cons file test-list)
-                                               "::"))))
+                                                (cons file test-list)
+                                                "::"))))
    (module
     (elpy-test-run top
                    "py.test" "-vv" file))
@@ -23,11 +23,11 @@
 
 (setq python-check-command "/usr/bin/pyflakes")
 (add-hook 'python-mode-hook
-      (lambda ()
-        (define-key python-mode-map (kbd "C-c C-v") nil)))
+          (lambda ()
+            (define-key python-mode-map (kbd "C-c C-v") nil)))
 (add-hook 'python-mode-hook
-      (lambda ()
-        (define-key python-mode-map (kbd "C-c C-v") 'elpy-check)))
+          (lambda ()
+            (define-key python-mode-map (kbd "C-c C-v") 'elpy-check)))
 (elpy-use-ipython)
 
 ;; until cython-mode works

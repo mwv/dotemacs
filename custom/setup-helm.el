@@ -22,19 +22,26 @@
 
 (when (executable-find "ack")
   (setq helm-grep-default-command "ack -Hn --no-group --no-color %e %p %f"
-    helm-grep-default-recurse-command "ack -H --no-group --no-color %e %p %f"))
+        helm-grep-default-recurse-command "ack -H --no-group --no-color %e %p %f"))
 
 (setq
- helm-scroll-amount 4 ; scroll 4 lines other window using M-<next>/M-<prior>
- helm-quick-update t ; do not display invisible candidates
- helm-ff-search-library-in-sexp t ; search for library in `require' and `declare-function' sexp.
- helm-split-window-in-side-p t ;; open helm buffer inside current window, not occupy whole other window
- helm-candidate-number-limit 500 ; limit the number of displayed canidates
+ ;; scroll 4 lines other window using M-<next>/M-<prior>
+ helm-scroll-amount 4
+ ;; do not display invisible candidates
+ helm-quick-update t
+ ;; search for library in `require' and `declare-function' sexp.
+ helm-ff-search-library-in-sexp t
+ ;; open helm buffer inside current window, not occupy whole other window
+ helm-split-window-in-side-p t
+ ;; limit the number of displayed canidates
+ helm-candidate-number-limit 500
+ ;; use recentf
  helm-ff-file-name-history-use-recentf t
- helm-move-to-line-cycle-in-source t ; move to end or beginning of source when reaching top or bottom of source.
- helm-buffers-fuzzy-matching t          ; fuzzy matching buffer names when non-nil
-                    ; useful in helm-mini that lists buffers
-
+ ;; move to end or beginning of source when reaching top or bottom of source.
+ helm-move-to-line-cycle-in-source t
+ ;; fuzzy matching buffer names when non-nil
+ ;; useful in helm-mini that lists buffers
+ helm-buffers-fuzzy-matching t
  )
 
 (add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages)
@@ -56,8 +63,8 @@
 
 ;; use helm to list eshell history
 (add-hook 'eshell-mode-hook
-      #'(lambda ()
-          (define-key eshell-mode-map (kbd "M-l")  'helm-eshell-history)))
+          #'(lambda ()
+              (define-key eshell-mode-map (kbd "M-l")  'helm-eshell-history)))
 
 ;;; Save current position to mark ring
 (add-hook 'helm-goto-line-before-hook 'helm-save-current-pos-to-mark-ring)
@@ -110,6 +117,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; PACKAGE: helm-swoop                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ;; Locate the helm-swoop folder to your path
 (require 'helm-swoop)
 

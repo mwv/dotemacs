@@ -1,9 +1,9 @@
 ;; HASKELL
 (setq haskell-font-lock-symbols t)
 (add-hook 'haskell-mode-hook
-	  'turn-on-haskell-indentation)
+          'turn-on-haskell-indentation)
 (add-hook 'haskell-mode-hook
-	  'interactive-haskell-mode)
+          'interactive-haskell-mode)
 (setq haskell-process-type 'cabal-repl)
 (eval-after-load "haskell-mode"
   '(progn
@@ -17,7 +17,8 @@
      (define-key haskell-mode-map (kbd "C-c C-k") 'haskell-interactive-mode-clear)
      (define-key haskell-mode-map (kbd "C-c c") 'haskell-process-cabal)
      (define-key haskell-mode-map (kbd "SPC") 'haskell-mode-contextual-space)
-       ))
+     )
+  )
 
 (custom-set-variables
  '(haskell-process-log t)
