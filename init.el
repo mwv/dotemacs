@@ -3,8 +3,8 @@
 (require 'package)
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-             ("melpa" . "http://melpa.milkbox.net/packages/")
-             ("elpy" . "http://jorgenschaefer.github.io/packages/")))
+                         ("melpa" . "http://melpa.milkbox.net/packages/")
+                         ("elpy" . "http://jorgenschaefer.github.io/packages/")))
 (package-initialize)
 
 (defconst my-packages
@@ -59,11 +59,11 @@
 (defun remove-elc-on-save ()
   "Remove .elc file after saves."
   (add-hook 'after-save-hook
-        (lambda ()
-          (if (file-exists-p (concat buffer-file-name "c"))
-          (delete-file (concat buffer-file-name "c"))))
-        nil
-        t))
+            (lambda ()
+              (if (file-exists-p (concat buffer-file-name "c"))
+                  (delete-file (concat buffer-file-name "c"))))
+            nil
+            t))
 
 (add-hook 'emacs-lisp-mode-hook 'remove-elc-on-save)
 
@@ -80,8 +80,6 @@
 (require 'setup-helm)
 (require 'setup-projectile)
 (require 'setup-magit)
-(require 'setup-cedet)
-
 (require 'setup-cedet)
 (require 'setup-cc)
 (require 'setup-python)
