@@ -15,16 +15,20 @@
     dash
     dtrt-indent
     duplicate-thing
+    ein
     elpy
     fic-mode
+    fill-column-indicator
     function-args
     git-gutter-fringe
     ggtags
     haskell-mode
     helm
     helm-gtags
+    helm-projectile
     helm-swoop
     iedit
+    ignoramus
     info+
     magit
     moe-theme
@@ -124,6 +128,3 @@
 ;; bind helm-imenu
 (global-set-key (kbd "C-c C-j") 'helm-imenu)
 (global-set-key (kbd "C-.") 'helm-imenu)
-
-(add-to-list 'load-path "~/.emacs.d/elpa/emacs-ipython-notebook")
-(require 'ein2)
