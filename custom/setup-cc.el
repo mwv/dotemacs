@@ -4,7 +4,7 @@
 (define-key c-mode-map  [(tab)] 'moo-complete)
 (define-key c++-mode-map  [(tab)] 'moo-complete)
 
-;; Available C style:
+;; Available C styles:
 ;; “gnu”: The default style for GNU projects
 ;; “k&r”: What Kernighan and Ritchie, the authors of C used in their book
 ;; “bsd”: What BSD developers use, aka “Allman style” after Eric Allman.
@@ -15,15 +15,14 @@
 ;; “python”: What Python developers use for extension modules
 ;; “java”: The default style for java-mode (see below)
 ;; “user”: When you want to define your own style
-(setq
- c-default-style "ellemtel" ;; set style to "linux"
- )
+(setq c-default-style "k&r")
 
 ;; Compilation
-(global-set-key (kbd "<f5>") (lambda ()
-                               (interactive)
-                               (setq-local compilation-read-command nil)
-                               (call-interactively 'compile)))
+(global-set-key (kbd "<f5>")
+                (lambda ()
+                  (interactive)
+                  (setq-local compilation-read-command nil)
+                  (call-interactively 'compile)))
 
 ;; setup GDB
 (setq
