@@ -32,6 +32,7 @@
     info+
     magit
     moe-theme
+    neotree
     nose
     projectile
     rainbow-mode

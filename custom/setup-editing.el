@@ -531,4 +531,25 @@ Position the cursor at it's beginning, according to the current mode."
 (require 'ws-butler)
 (add-hook 'prog-mode-hook 'ws-butler-mode)
 
+
+;; Package: neotree
+(require 'neotree)
+(global-set-key [f8] 'neotree-toggle)
+
+(setq projectile-switch-project-action 'neotree-projectile-action)
+
+(require 'find-file-in-project)
+(defun neotree-project-dir ()
+  "Open NeoTree using the git root."
+  (interactive)
+  (let ((project-dir (ffip-project-root))
+        (file-name (buffer-file-name)))
+    (if project-dir
+        (progn
+          (neotree-dir project-dir)
+          (neotree-find file-name))
+      (message "Could not find git project root."))))
+
+
+
 (provide 'setup-editing)
