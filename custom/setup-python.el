@@ -33,4 +33,6 @@
 ;; until cython-mode works
 (add-to-list 'auto-mode-alist '("\\.pyx\\'" . python-mode))
 
+(require 'ein)
+
 (provide 'setup-python)
