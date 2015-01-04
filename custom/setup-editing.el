@@ -14,7 +14,7 @@
       )
 
 (add-hook 'sh-mode-hook (lambda ()
-              (setq tab-width 4)))
+                          (setq tab-width 4)))
 
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
@@ -32,18 +32,18 @@
 
 ;; show whitespace in diff-mode
 (add-hook 'diff-mode-hook (lambda ()
-                (setq-local whitespace-style
-                    '(face
-                      tabs
-                      tab-mark
-                      spaces
-                      space-mark
-                      trailing
-                      indentation::space
-                      indentation::tab
-                      newline
-                      newline-mark))
-                (whitespace-mode 1)))
+                            (setq-local whitespace-style
+                                        '(face
+                                          tabs
+                                          tab-mark
+                                          spaces
+                                          space-mark
+                                          trailing
+                                          indentation::space
+                                          indentation::tab
+                                          newline
+                                          newline-mark))
+                            (whitespace-mode 1)))
 
 ;; Package: volatile-highlights
 ;; GROUP: Editing -> Volatile Highlights
@@ -89,18 +89,18 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (defadvice whitespace-cleanup
-  (around whitespace-cleanup-indent-tab activate)
+    (around whitespace-cleanup-indent-tab activate)
   "Fix whitespace-cleanup indent-tabs-mode bug"
   (let ((whitespace-indent-tabs-mode indent-tabs-mode)
-    (whitespace-tab-width tab-width))
+        (whitespace-tab-width tab-width))
     ad-do-it))
 (add-hook 'before-save-hook 'whitespace-cleanup)
 (add-hook 'python-mode-hook
-  '(lambda ()
-     (add-hook 'before-save-hook 'untabify-buffer)))
+          '(lambda ()
+             (add-hook 'before-save-hook 'untabify-buffer)))
 (add-hook 'cc-mode-hook
-  '(lambda ()
-     (add-hook 'before-save-hook 'untabify-buffer)))
+          '(lambda ()
+             (add-hook 'before-save-hook 'untabify-buffer)))
 (add-hook 'makefile-gmake-mode-hook 'indent-tabs-mode)
 
 ;; Package: yasnippet
@@ -128,17 +128,17 @@
 (defun yas/goto-end-of-active-field ()
   (interactive)
   (let* ((snippet (car (yas--snippets-at-point)))
-     (position (yas--field-end (yas--snippet-active-field snippet))))
+         (position (yas--field-end (yas--snippet-active-field snippet))))
     (if (= (point) position)
-    (move-end-of-line 1)
+        (move-end-of-line 1)
       (goto-char position))))
 
 (defun yas/goto-start-of-active-field ()
   (interactive)
   (let* ((snippet (car (yas--snippets-at-point)))
-     (position (yas--field-start (yas--snippet-active-field snippet))))
+         (position (yas--field-start (yas--snippet-active-field snippet))))
     (if (= (point) position)
-    (move-beginning-of-line 1)
+        (move-beginning-of-line 1)
       (goto-char position))))
 
 (define-key yas-keymap (kbd "C-e") 'yas/goto-end-of-active-field)
@@ -206,7 +206,7 @@ line instead."
    (if mark-active (list (region-beginning) (region-end))
      (message "Copied line")
      (list (line-beginning-position)
-       (line-beginning-position 2)))))
+           (line-beginning-position 2)))))
 
 (defadvice kill-region (before slick-cut activate compile)
   "When called interactively with no active region, kill a single
@@ -214,19 +214,19 @@ line instead."
   (interactive
    (if mark-active (list (region-beginning) (region-end))
      (list (line-beginning-position)
-       (line-beginning-position 2)))))
+           (line-beginning-position 2)))))
 
 ;; kill a line, including whitespace characters until next non-whiepsace character
 ;; of next line
 (defadvice kill-line (before check-position activate)
   (if (member major-mode
-          '(emacs-lisp-mode scheme-mode lisp-mode
-                c-mode c++-mode objc-mode
-                latex-mode plain-tex-mode))
+              '(emacs-lisp-mode scheme-mode lisp-mode
+                                c-mode c++-mode objc-mode
+                                latex-mode plain-tex-mode))
       (if (and (eolp) (not (bolp)))
-      (progn (forward-char 1)
-         (just-one-space 0)
-         (backward-char 1)))))
+          (progn (forward-char 1)
+                 (just-one-space 0)
+                 (backward-char 1)))))
 
 ;; taken from prelude-editor.el
 ;; automatically indenting yanked text if in programming-modes
@@ -251,19 +251,19 @@ Only modes that don't derive from `prog-mode' should be listed here.")
   "If current mode is one of 'yank-indent-modes,
 indent yanked text (with prefix arg don't indent)."
   (if (and (not (ad-get-arg 0))
-       (not (member major-mode yank-indent-blacklisted-modes))
-       (or (derived-mode-p 'prog-mode)
-           (member major-mode yank-indent-modes)))
+           (not (member major-mode yank-indent-blacklisted-modes))
+           (or (derived-mode-p 'prog-mode)
+               (member major-mode yank-indent-modes)))
       (let ((transient-mark-mode nil))
-    (yank-advised-indent-function (region-beginning) (region-end)))))
+        (yank-advised-indent-function (region-beginning) (region-end)))))
 
 (defadvice yank-pop (after yank-pop-indent activate)
   "If current mode is one of `yank-indent-modes',
 indent yanked text (with prefix arg don't indent)."
   (when (and (not (ad-get-arg 0))
-         (not (member major-mode yank-indent-blacklisted-modes))
-         (or (derived-mode-p 'prog-mode)
-         (member major-mode yank-indent-modes)))
+             (not (member major-mode yank-indent-blacklisted-modes))
+             (or (derived-mode-p 'prog-mode)
+                 (member major-mode yank-indent-modes)))
     (let ((transient-mark-mode nil))
       (yank-advised-indent-function (region-beginning) (region-end)))))
 
@@ -285,12 +285,12 @@ indent yanked text (with prefix arg don't indent)."
   (unless (member major-mode prelude-indent-sensitive-modes)
     (save-excursion
       (if (region-active-p)
-      (progn
-        (indent-region (region-beginning) (region-end))
-        (message "Indented selected region."))
-    (progn
-      (indent-buffer)
-      (message "Indented buffer.")))
+          (progn
+            (indent-region (region-beginning) (region-end))
+            (message "Indented selected region."))
+        (progn
+          (indent-buffer)
+          (message "Indented buffer.")))
       (whitespace-cleanup))))
 
 (global-set-key (kbd "C-c i") 'indent-region-or-buffer)
@@ -302,10 +302,10 @@ indent yanked text (with prefix arg don't indent)."
 or region."
   (let (beg end)
     (if (and mark-active (> (point) (mark)))
-    (exchange-point-and-mark))
+        (exchange-point-and-mark))
     (setq beg (line-beginning-position))
     (if mark-active
-    (exchange-point-and-mark))
+        (exchange-point-and-mark))
     (setq end (line-end-position))
     (cons beg end)))
 
@@ -361,7 +361,7 @@ Position the cursor at it's beginning, according to the current mode."
   (interactive)
   (dolist (buffer (buffer-list))
     (unless (or (eql buffer (current-buffer))
-        (not (buffer-file-name buffer)))
+                (not (buffer-file-name buffer)))
       (kill-buffer buffer))))
 
 (global-set-key (kbd "C-c k") 'kill-other-buffers)
@@ -379,21 +379,21 @@ Position the cursor at it's beginning, according to the current mode."
 (global-set-key (kbd "C-x a r") 'align-regexp)
 
 (add-to-list 'align-rules-list
-         '(haskell-types
-           (regexp . "\\(\\s-+\\)\\(::\\|∷\\)\\s-+")
-           (modes quote (haskell-mode literate-haskell-mode))))
+             '(haskell-types
+               (regexp . "\\(\\s-+\\)\\(::\\|∷\\)\\s-+")
+               (modes quote (haskell-mode literate-haskell-mode))))
 (add-to-list 'align-rules-list
-         '(haskell-assignment
-           (regexp . "\\(\\s-+\\)=\\s-+")
-           (modes quote (haskell-mode literate-haskell-mode))))
+             '(haskell-assignment
+               (regexp . "\\(\\s-+\\)=\\s-+")
+               (modes quote (haskell-mode literate-haskell-mode))))
 (add-to-list 'align-rules-list
-         '(haskell-arrows
-           (regexp . "\\(\\s-+\\)\\(->\\|→\\)\\s-+")
-           (modes quote (haskell-mode literate-haskell-mode))))
+             '(haskell-arrows
+               (regexp . "\\(\\s-+\\)\\(->\\|→\\)\\s-+")
+               (modes quote (haskell-mode literate-haskell-mode))))
 (add-to-list 'align-rules-list
-         '(haskell-left-arrows
-           (regexp . "\\(\\s-+\\)\\(<-\\|←\\)\\s-+")
-           (modes quote (haskell-mode literate-haskell-mode))))
+             '(haskell-left-arrows
+               (regexp . "\\(\\s-+\\)\\(<-\\|←\\)\\s-+")
+               (modes quote (haskell-mode literate-haskell-mode))))
 
 (defun kill-this-buffer ()
   (interactive)
@@ -416,6 +416,9 @@ Position the cursor at it's beginning, according to the current mode."
 (global-set-key (kbd "M-n") 'end-of-defun)
 (global-set-key (kbd "M-p") 'beginning-of-defun)
 
+;; just to not get the warning everytime I accidentally hit this:
+(global-set-key (kbd "C-x C-n") 'next-line)
+
 
 (defun large-file-hook ()
   "If a file is over a given size, make the buffer read only."
@@ -429,11 +432,11 @@ Position the cursor at it's beginning, according to the current mode."
 ;; FUNCTIONS
 
 (defadvice zap-to-char (after my-zap-to-char-advice (arg char) activate)
-    "Kill up to the ARG'th occurence of CHAR, and leave CHAR. If
+  "Kill up to the ARG'th occurence of CHAR, and leave CHAR. If
   you are deleting forward, the CHAR is replaced and the point is
   put before CHAR"
-    (insert char)
-    (if (< 0 arg) (forward-char -1)))
+  (insert char)
+  (if (< 0 arg) (forward-char -1)))
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
@@ -465,7 +468,7 @@ Position the cursor at it's beginning, according to the current mode."
 
 ;; quickly open init file
 (defun find-user-init-file-other-window ()
-  "Edit teh `user-init-file' in another window."
+  "Edit the `user-init-file' in another window."
   (interactive)
   (find-file-other-window user-init-file))
 (global-set-key (kbd "C-c I") 'find-user-init-file-other-window)
@@ -475,13 +478,13 @@ Position the cursor at it's beginning, according to the current mode."
   (interactive)
   (let ((filename (buffer-file-name)))
     (if (not (and filename (file-exists-p filename)))
-    (message "Buffer is not visiting a file!")
+        (message "Buffer is not visiting a file!")
       (let ((new-name (read-file-name "New name: " filename)))
-    (cond
-     ((vc-backend filename) (vc-rename-file filename new-name))
-     (t
-      (rename-file filename new-name t)
-      (set-visited-file-name new-name t t)))))))
+        (cond
+         ((vc-backend filename) (vc-rename-file filename new-name))
+         (t
+          (rename-file filename new-name t)
+          (set-visited-file-name new-name t t)))))))
 (global-set-key (kbd "C-c r") 'rename-file-and-buffer)
 
 (defun swap-windows ()
@@ -490,11 +493,11 @@ Position the cursor at it's beginning, according to the current mode."
   (if (/= (count-windows) 2)
       (message "You need exactly two windows open to do this.")
     (let* ((w1 (car (window-list)))
-       (w2 (cadr (window-list)))
-       (b1 (window-buffer w1))
-       (b2 (window-buffer w2))
-       (s1 (window-start w1))
-       (s2 (window-start w2)))
+           (w2 (cadr (window-list)))
+           (b1 (window-buffer w1))
+           (b2 (window-buffer w2))
+           (s1 (window-start w1))
+           (s2 (window-start w2)))
       (set-window-buffer w1 b2)
       (set-window-buffer w2 b1)
       (set-window-start w1 w2)
@@ -507,7 +510,8 @@ Position the cursor at it's beginning, according to the current mode."
 (global-set-key (kbd "C-c w") 'whitespace-mode)
 
 ;; show unncessary whitespace that can mess up your diff
-(add-hook 'prog-mode-hook (lambda () (interactive) (setq show-trailing-whitespace 1)))
+(add-hook 'prog-mode-hook
+          (lambda () (interactive) (setq show-trailing-whitespace 1)))
 
 ;; use space to indent by default
 (setq-default indent-tabs-mode nil)
@@ -520,8 +524,8 @@ Position the cursor at it's beginning, according to the current mode."
 (add-hook 'prog-mode-hook 'clean-aindent-mode)
 
 ;; Package: dtrt-indent
-(require 'dtrt-indent)
-(dtrt-indent-mode 1)
+;; (require 'dtrt-indent)
+;; (dtrt-indent-mode 1)
 
 ;; Package: ws-butler
 (require 'ws-butler)
