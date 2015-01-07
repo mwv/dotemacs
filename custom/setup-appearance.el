@@ -15,27 +15,30 @@
 (require 'avoid)
 (mouse-avoidance-mode 'animate)
 
-(require 'moe-theme)
-(moe-dark)
-(set-face-attribute 'font-lock-comment-face nil
-                     :foreground "#00d7af")
-(set-face-attribute 'font-lock-comment-delimiter-face nil
-                    :foreground "#00d7af")
-(set-face-attribute 'rainbow-delimiters-unmatched-face nil
-                    :foreground "black"
-                    :background "red")
-(set-face-attribute 'rainbow-delimiters-mismatched-face nil
-                    :foreground "black"
-                    :background "red")
-(set-face-attribute 'rainbow-delimiters-depth-1-face nil
-                    :foreground "#c0c0c0"
-                    :background "black")
-(set-face-attribute 'rainbow-delimiters-depth-2-face nil
-                    :foreground "#5faf00")
+(load-theme 'grandshell t)
+;; (require 'moe-theme)
+;; (moe-dark)
+;; (set-face-attribute 'font-lock-comment-face nil
+;;                     :foreground "#00d7af")
+;; (set-face-attribute 'font-lock-comment-delimiter-face nil
+;;                     :foreground "#00d7af")
 
-(set-face-attribute 'show-paren-mismatch nil
-                     :foreground "black"
-                     :background "red")
+;; (require 'rainbow-delimiters)
+;; (set-face-attribute 'rainbow-delimiters-unmatched-face nil
+;;                     :foreground "black"
+;;                     :background "red")
+;; (set-face-attribute 'rainbow-delimiters-mismatched-face nil
+;;                     :foreground "black"
+;;                     :background "red")
+;; (set-face-attribute 'rainbow-delimiters-depth-1-face nil
+;;                     :foreground "#c0c0c0"
+;;                     :background "black")
+;; (set-face-attribute 'rainbow-delimiters-depth-2-face nil
+;;                     :foreground "#5faf00")
+
+;; (set-face-attribute 'show-paren-mismatch nil
+;;                      :foreground "black"
+;;                      :background "red")
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
 (require 'iedit)
@@ -123,7 +126,7 @@ from `frame-params-file'."
                    (string-match "*" (buffer-name))))
     (linum-mode 1)))
 (set-face-attribute 'linum nil
-                    :background "gray20" :foreground "gray40")
+                    :background "black" :foreground "gray30")
 (global-linum-mode t)
 
 (require 'uniquify)
@@ -140,7 +143,7 @@ from `frame-params-file'."
 (global-fci-mode 1)
 
 (set-face-attribute 'fringe nil
-                    :background "gray20")
+                    :background "black")
 
 (require 'company)
 (defvar-local company-fci-mode-on-p nil)
@@ -158,7 +161,7 @@ from `frame-params-file'."
 
 
 (require 'highlight-indentation)
-(set-face-background 'highlight-indentation-face "#3f3f3f")
+(set-face-background 'highlight-indentation-face "#101010")
 
 ;; mark transient
 (transient-mark-mode t)

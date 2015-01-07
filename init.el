@@ -35,7 +35,7 @@
     neotree
     nose
     projectile
-    rainbow-delimiters-mode
+    rainbow-delimiters
     rainbow-mode
     s
     smartparens
