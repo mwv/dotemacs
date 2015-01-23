@@ -1,8 +1,8 @@
 ;; function-args
-(require 'function-args)
-(fa-config-default)
-(define-key c-mode-map  [(tab)] 'moo-complete)
-(define-key c++-mode-map  [(tab)] 'moo-complete)
+;; (require 'function-args)
+;; (fa-config-default)
+;; (define-key c-mode-map  [(tab)] 'moo-complete)
+;; (define-key c++-mode-map  [(tab)] 'moo-complete)
 
 ;; Available C styles:
 ;; “gnu”: The default style for GNU projects
@@ -15,10 +15,18 @@
 ;; “python”: What Python developers use for extension modules
 ;; “java”: The default style for java-mode (see below)
 ;; “user”: When you want to define your own style
-(setq c-default-style "k&r")
+(setq c-default-style "bsd")
+
+(defun my-c-indent-hook ()
+  (setq c-basic-offset 4
+        c-indent-level 4
+        c-toggle-auto-state 1
+        c-default-style "bsd"))
+
+(add-hook 'c-mode-common-hook 'my-c-indent-hook)
 
 ;; Compilation
-(global-set-key (kbd "<f5>")
+(global-set-key (kbd "<f6>")
                 (lambda ()
                   (interactive)
                   (setq-local compilation-read-command nil)

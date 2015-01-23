@@ -157,12 +157,12 @@
 
 (add-hook 'term-mode-hook (lambda() (setq yas-dont-activate t)))
 
-;; PACKAGE: anzu
-;; GROUP: Editing -> Matching -> Isearch -> Anzu
-(require 'anzu)
-(global-anzu-mode)
-(global-set-key (kbd "M-%") 'anzu-query-replace)
-(global-set-key (kbd "C-M-%") 'anzu-query-replace-regexp)
+;; ;; PACKAGE: anzu
+;; ;; GROUP: Editing -> Matching -> Isearch -> Anzu
+;; (require 'anzu)
+;; (global-anzu-mode)
+;; (global-set-key (kbd "M-%") 'anzu-query-replace)
+;; (global-set-key (kbd "C-M-%") 'anzu-query-replace-regexp)
 
 ;; PACKAGE: iedit
 (setq iedit-toggle-key-default nil)
@@ -415,6 +415,7 @@ Position the cursor at it's beginning, according to the current mode."
 (global-set-key (kbd "M-o") 'other-window)
 (global-set-key (kbd "M-n") 'end-of-defun)
 (global-set-key (kbd "M-p") 'beginning-of-defun)
+(global-unset-key (kbd "M-ESC ESC"))
 
 ;; just to not get the warning everytime I accidentally hit this:
 (global-set-key (kbd "C-x C-n") 'next-line)

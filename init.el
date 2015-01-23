@@ -8,14 +8,14 @@
 (package-initialize)
 
 (defconst my-packages
-  '(anzu
-    clean-aindent-mode
+  '(clean-aindent-mode
     company
     comment-dwim-2
     dash
     dtrt-indent
     duplicate-thing
     ein
+    eieio
     elpy
     fic-mode
     fill-column-indicator
@@ -78,16 +78,20 @@
 
 (add-to-list 'load-path "~/.emacs.d/custom")
 
-(require 'setup-appearance)
+(require 'eieio)
+(defun class-slot-initarg (class-name slot)
+  (eieio--class-slot-initarg (eieio--class-v class-name) slot))
+
 (require 'setup-helm)
 (require 'setup-projectile)
 (require 'setup-magit)
-(require 'setup-cedet)
+;; (require 'setup-cedet)
 (require 'setup-cc)
 (require 'setup-python)
 (require 'setup-haskell)
 (require 'setup-editing)
 (require 'setup-org)
+(require 'setup-appearance)
 
 (require 'saveplace)
 (setq-default save-place t)

@@ -30,6 +30,8 @@
             (define-key python-mode-map (kbd "C-c C-v") 'elpy-check)))
 (elpy-use-ipython)
 
+(setq elpy-rpc-backend "jedi")
+
 ;; until cython-mode works
 (add-to-list 'auto-mode-alist '("\\.pyx\\'" . python-mode))
 
