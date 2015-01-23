@@ -36,10 +36,8 @@
     nose
     projectile
     rainbow-delimiters
-    rainbow-mode
     s
     smartparens
-    sml-mode
     undo-tree
     volatile-highlights
     ws-butler
