@@ -2,6 +2,9 @@
 (setq magit-save-some-buffers 'dontask
       magit-set-upstream-on-push t)
 
+(setq magit-auto-revert-mode nil)
+(setq magit-last-seen-setup-instructions "1.4.0")
+
 ;; extra newline to separate commit mesage from git commentary
 (defun magit-commit-mode-init ()
   (when (looking-at "\n")
