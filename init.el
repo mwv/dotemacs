@@ -83,7 +83,7 @@
 (require 'setup-helm)
 (require 'setup-projectile)
 (require 'setup-magit)
-;; (require 'setup-cedet)
+(require 'setup-cedet)
 (require 'setup-cc)
 (require 'setup-python)
 (require 'setup-haskell)
@@ -114,7 +114,6 @@
 (global-set-key (kbd "C-x 1") 'zygospore-toggle-delete-other-windows)
 
 ;; fix for company and yasnippet
-
 (define-key company-active-map "\t" 'company-yasnippet-or-completion)
 (defun company-yasnippet-or-completion ()
   (interactive)
