@@ -72,7 +72,7 @@
   (interactive)
   (byte-recompile-directory user-emacs-directory 0))
 
-;; (byte-compile-init-dir)
+(byte-compile-init-dir)
 
 (add-to-list 'load-path "~/.emacs.d/custom")
 
