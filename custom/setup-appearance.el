@@ -20,8 +20,9 @@
 ;; (set-face-background 'highlight-indentation-face "#gray13")
 (load-theme 'ample-flat t)
 (enable-theme 'ample-flat)
-;; (set-face-attribute 'default nil
-;;                     :foreground "white")
+(set-face-attribute 'default nil
+                    :background "#222")
+
 (require 'smartparens)
 (set-face-attribute 'sp-pair-overlay-face nil
                     :background "lightolivegreen")
@@ -43,6 +44,7 @@
 (require 'fic-mode)
 (add-hook 'prog-mode-hook 'turn-on-fic-mode)
 (set-face-attribute 'font-lock-fic-face nil
+                    :foreground "yellow"
                     :background nil
                     :underline nil)
 
@@ -142,8 +144,8 @@ from `frame-params-file'."
 
 ;; ;; WHICH-FUNCTION-MODE
 ;; ;; Show the current function name in the header line
-(which-function-mode)
-(set-face-background 'which-func "gray30")
+;; (which-function-mode)
+;; (set-face-background 'which-func "gray30")
 
 (require 'linum)
 (defcustom linum-disabled-modes-list
@@ -181,10 +183,11 @@ from `frame-params-file'."
   (lambda () (fci-mode 1)))
 (global-fci-mode 1)
 
-;; (set-face-attribute 'fringe nil
-;;                     :background "black")
+(set-face-attribute 'fringe nil
+                    :background "#222")
 
 (require 'company)
+(require 'fill-column-indicator)
 (defvar-local company-fci-mode-on-p nil)
 (defun company-turn-off-fci (&rest ignore)
   (when (boundp 'fci-mode)
@@ -197,8 +200,6 @@ from `frame-params-file'."
 (add-hook 'company-completion-started-hook 'company-turn-off-fci)
 (add-hook 'company-completion-finished-hook 'company-maybe-turn-on-fci)
 (add-hook 'company-completion-cancelled-hook 'company-maybe-turn-on-fci)
-
-
 
 
 ;; mark transient
