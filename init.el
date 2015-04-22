@@ -84,7 +84,7 @@
 (require 'setup-helm)
 (require 'setup-projectile)
 (require 'setup-magit)
-(require 'setup-cedet)
+;; (require 'setup-cedet)
 (require 'setup-cc)
 (require 'setup-python)
 (require 'setup-haskell)
