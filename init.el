@@ -8,7 +8,8 @@
 (package-initialize)
 
 (defconst my-packages
-  '(clean-aindent-mode
+  '(ample-theme
+    clean-aindent-mode
     company
     comment-dwim-2
     dash
