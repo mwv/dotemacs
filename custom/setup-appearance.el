@@ -224,19 +224,17 @@ from `frame-params-file'."
  mode-line-format
  '((:eval
     (cond (buffer-read-only
-           (propertize " RO " 'face 'mode-line-read-only-face))
+           (propertize " RO "))
           ((buffer-modified-p)
-           (propertize " ** " 'face 'mode-line-modified-face))
+           (propertize " ** "))
           (t " -- ")))
    " "
    ;; directory and buffer name
    (:propertize (:eval (shorten-directory default-directory 15))
-                face mode-line-folder-face)
+                )
    (:propertize "%b"
-                face mode-line-filename-face)
+                )
    " "
-   ;; (:propertize which-func-format
-   ;;              face mode-line-mode-face)
 
    ;; mode indicators: vc, recursive edit, major mode,
    ;; minor modes, process, global
@@ -244,8 +242,6 @@ from `frame-params-file'."
    " "
    ;; " \["
 
-   (:propertize mode-name
-                face mode-line-mode-face)
    ;; "\] "
    ;; narrow
    " %n "
