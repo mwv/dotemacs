@@ -39,6 +39,7 @@
     rainbow-delimiters
     s
     smartparens
+    toml-mode
     undo-tree
     volatile-highlights
     ws-butler
