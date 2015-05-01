@@ -1,8 +1,10 @@
 ;; PYTHON
 (elpy-enable)
+
 (if (eq system-type 'darwin)
-    (setq elpy-rpc-python-command "python")
+    (setq elpy-rpc-python-command "/usr/local/bin/python")
     (setq elpy-rpc-python-command "/usr/bin/python2"))
+
 
 (defun elpy-test-pytest-verbose-runner (top file module test)
   "Test the project using the py.test test runner and print verbose test results."
