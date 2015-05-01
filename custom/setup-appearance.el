@@ -6,7 +6,7 @@
 (setq ring-bell-function 'ignore)
 (visual-line-mode t)
 (if (or (string-equal window-system "x") (string-equal window-system "ns"))
-    (set-face-attribute 'default nil :family "Monaco" :height 120))
+    (set-face-attribute 'default nil :family "Monaco" :height 140))
 
 (require 'fringe)
 (fringe-mode 20)
