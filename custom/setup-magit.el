@@ -3,13 +3,13 @@
       magit-set-upstream-on-push t)
 
 (setq magit-auto-revert-mode nil)
-(setq magit-last-seen-setup-instructions "1.4.0")
+;; (setq magit-last-seen-setup-instructions "1.4.0")
 
 ;; extra newline to separate commit mesage from git commentary
-(defun magit-commit-mode-init ()
-  (when (looking-at "\n")
-    (open-line 1)))
-(add-hook 'git-commit-mode-hook 'magit-commit-mode-init)
+;; (defun magit-commit-mode-init ()
+;;   (when (looking-at "\n")
+;;     (open-line 1)))
+;; (add-hook 'git-commit-mode-hook 'magit-commit-mode-init)
 
 (global-set-key (kbd "C-x g") 'magit-status)
 
