@@ -5,8 +5,8 @@
 (scroll-bar-mode 0)
 (setq ring-bell-function 'ignore)
 (visual-line-mode t)
-(if (string-equal window-system "x")
-    (set-face-attribute 'default nil :family "Monaco" :height 120))
+(if (or (string-equal window-system "x") (string-equal window-system "ns"))
+    (set-face-attribute 'default nil :family "Monaco" :height 140))
 
 (require 'fringe)
 (fringe-mode 20)
@@ -88,7 +88,7 @@
 (set-face-foreground 'iedit-occurrence "black")
 (set-face-background 'iedit-occurrence "yellow")
 
-(if (string= "x" window-system)
+(if (or (string= "x" window-system) (string= "ns" window-system))
      (defvar frame-params-file
        (locate-user-emacs-file ".frameparams")
        "File to save frame parameters to on exit")
