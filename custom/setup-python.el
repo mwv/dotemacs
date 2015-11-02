@@ -1,6 +1,6 @@
 ;; PYTHON
 (elpy-enable)
-(setq elpy-rpc-python-command "/usr/bin/python2")
+(setq elpy-rpc-python-command "/usr/bin/python")
 
 (defun elpy-test-pytest-verbose-runner (top file module test)
   "Test the project using the py.test test runner and print verbose test results."
@@ -28,9 +28,9 @@
 (add-hook 'python-mode-hook
           (lambda ()
             (define-key python-mode-map (kbd "C-c C-v") 'elpy-check)))
-(elpy-use-ipython)
+;; (elpy-use-ipython)
 
-(setq elpy-rpc-backend "rope")
+(setq elpy-rpc-backend "jedi")
 
 ;; until cython-mode works
 (add-to-list 'auto-mode-alist '("\\.pyx\\'" . python-mode))

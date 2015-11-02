@@ -32,13 +32,15 @@
     ignoramus
     info+
     magit
-    moe-theme
+    ;; moe-theme
     neotree
     nose
     projectile
     rainbow-delimiters
+    rust-mode
     s
     smartparens
+    toml-mode
     undo-tree
     volatile-highlights
     ws-butler
