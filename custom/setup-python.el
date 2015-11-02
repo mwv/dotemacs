@@ -1,6 +1,10 @@
 ;; PYTHON
 (elpy-enable)
-(setq elpy-rpc-python-command "/usr/bin/python")
+;;(setq elpy-rpc-python-command "/usr/bin/python")
+
+(if (eq system-type 'darwin)
+    (setq elpy-rpc-python-command "/usr/local/bin/python")
+    (setq elpy-rpc-python-command "/usr/bin/python2"))
 
 (defun elpy-test-pytest-verbose-runner (top file module test)
   "Test the project using the py.test test runner and print verbose test results."
@@ -21,7 +25,9 @@
 (put 'elpy-test-pytest-verbose-runner 'elpy-test-runner-p t)
 (elpy-set-test-runner 'elpy-test-pytest-verbose-runner)
 
-(setq python-check-command "/usr/bin/pyflakes")
+(if (eq system-type 'darwin)
+    (setq python-check-command "/usr/local/bin/pyflakes")
+    (setq python-check-command "/usr/bin/pyflakes"))
 (add-hook 'python-mode-hook
           (lambda ()
             (define-key python-mode-map (kbd "C-c C-v") nil)))

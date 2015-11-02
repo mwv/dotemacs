@@ -406,7 +406,9 @@ Position the cursor at it's beginning, according to the current mode."
 
 (defun start-shell ()
   (interactive)
-  (ansi-term "/usr/bin/zsh"))
+  (if (eq system-type 'darwin)
+      (ansi-term "/usr/local/bin/zsh")
+      (ansi-term "/usr/bin/zsh")))
 
 (global-set-key [f1] 'start-shell)
 (global-set-key [f2] 'rgrep)
